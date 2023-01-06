@@ -31,6 +31,7 @@ custom_urlpatterns = [
     # custom url patterns
     path('auth/', include('custom_auth.urls')),
     path('profile/', include('user_profile.urls')),
+    path('orders/', include('orders.urls'))
 ]
 urlpatterns.extend(custom_urlpatterns)
 

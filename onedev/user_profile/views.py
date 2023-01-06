@@ -2,7 +2,6 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser
-from rest_framework.decorators import permission_classes
 from django.core.exceptions import ObjectDoesNotExist
 
 from custom_auth.models import CustomUser

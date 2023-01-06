@@ -152,7 +152,7 @@ REST_FRAMEWORK = {
 # DRF-spectacular
 SPECTACULAR_SETTINGS = {
     'TITLE': 'onedev API',
-    'DESCRIPTION': '',
+    'DESCRIPTION': 'by Bekzat Molutov',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'COMPONENT_SPLIT_REQUEST': True
