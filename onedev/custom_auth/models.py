@@ -20,7 +20,7 @@ class CustomUser(AbstractUser):
     )
     birth_date = models.DateField()
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["birth_date"]
+    REQUIRED_FIELDS = ["username", "birth_date"]
 
     class Meta:
         verbose_name = 'User'

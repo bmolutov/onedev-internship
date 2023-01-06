@@ -16,12 +16,45 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+
+urlpatterns = []
+
+
+custom_urlpatterns = [
+    # custom url patterns
+]
+urlpatterns.extend(custom_urlpatterns)
+
+
+drf_patterns = [
     # drf
     path('api-auth/', include('rest_framework.urls')),
+]
+urlpatterns.extend(drf_patterns)
+
+
+jwt_urlpatterns = [
+    # simple jwt
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+]
+urlpatterns.extend(jwt_urlpatterns)
+
+
+drf_spectacular_urlpatterns = [
     # drf-spectacular
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]
+urlpatterns.extend(drf_spectacular_urlpatterns)
+
+
+django_urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+urlpatterns.extend(django_urlpatterns)
