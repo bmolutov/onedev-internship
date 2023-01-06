@@ -32,6 +32,9 @@ class ProfileViewSet(viewsets.GenericViewSet): # noqa
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+        if instance.id != self.request.user.id:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         serializer = self.get_serializer(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
