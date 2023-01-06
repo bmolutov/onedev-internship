@@ -20,6 +20,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = []
@@ -27,6 +29,8 @@ urlpatterns = []
 
 custom_urlpatterns = [
     # custom url patterns
+    path('auth/', include('custom_auth.urls')),
+    path('profile/', include('user_profile.urls')),
 ]
 urlpatterns.extend(custom_urlpatterns)
 
@@ -40,8 +44,8 @@ urlpatterns.extend(drf_patterns)
 
 jwt_urlpatterns = [
     # simple jwt
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 urlpatterns.extend(jwt_urlpatterns)
 
@@ -55,6 +59,8 @@ urlpatterns.extend(drf_spectacular_urlpatterns)
 
 
 django_urlpatterns = [
+    # django
     path('admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
+                     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns.extend(django_urlpatterns)

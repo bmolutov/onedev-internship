@@ -1,2 +1,4 @@
 .idea
 onedev/**/__pycache__
+onedev/media
+onedev/static

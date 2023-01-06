@@ -1,14 +1,10 @@
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 
-from custom_auth.models import CustomUser
 from custom_auth.serializers import RegisterSerializer
 
 
 class RegisterViewSet(viewsets.GenericViewSet):
-    def get_queryset(self):
-        return CustomUser.objects.all()
-
     def get_serializer_class(self):
         if self.action == 'register':
             return RegisterSerializer
