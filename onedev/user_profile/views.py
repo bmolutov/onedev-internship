@@ -2,6 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser
+from rest_framework.decorators import permission_classes
 from django.core.exceptions import ObjectDoesNotExist
 
 from custom_auth.models import CustomUser
@@ -10,13 +11,10 @@ from user_profile.serializers import ProfileSerializer
 
 class ProfileViewSet(viewsets.GenericViewSet): # noqa
     parser_classes = (MultiPartParser,)
+    permission_classes = (IsAuthenticated,)
 
     def get_serializer_class(self):
         return ProfileSerializer
-
-    def get_permission_class(self):
-        if self.action in ['get', 'edit']:
-            return IsAuthenticated
 
     def get(self, request, *args, **kwargs):
         email = kwargs.get('email', None)
